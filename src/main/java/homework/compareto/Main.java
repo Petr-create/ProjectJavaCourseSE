@@ -91,7 +91,7 @@ public class Main {
         for(Person person : p)
             System.out.print(person + ", ");
 
-        Arrays.sort(p);
+        Arrays.sort(p, new AgeComporatorForArray());
         System.out.println();
         for(Person person : p)
             System.out.print(person + ", ");
