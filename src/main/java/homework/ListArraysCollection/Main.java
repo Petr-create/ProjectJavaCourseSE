@@ -1,9 +1,6 @@
 package homework.ListArraysCollection;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -74,9 +71,14 @@ public class Main {
 
         //5. Вывод списка:
         List<Fruits> fruits = new ArrayList<>();
+        fruits.add(new Fruits("Watermelon"));
         fruits.add(new Fruits("Apple"));
         fruits.add(new Fruits("Lemon"));
         fruits.add(new Fruits("Plum"));
+        fruits.add(new Fruits("Watermelon"));
+        fruits.add(new Fruits("Watermelon"));
+        fruits.add(new Fruits("Tomato"));
+
 
         System.out.print("{");
         for (Fruits f : fruits) {
@@ -109,13 +111,50 @@ public class Main {
                 System.out.print(q);
         }
         System.out.println();
+        System.out.println();
 
         //6 + 7: Пропускаем элементы, которые удовлетворяют некоторому условию
         //а) Пропустить первые 2 элемента, которые равные "****"
-        for (Person d : list2){
-            if(!(d.getName().equals("Николай") || d.getName().equals("Наиль")))
-                System.out.print(d);
+//        for (Person d : list2){
+//            if(!(d.getName().equals("Николай") || d.getName().equals("Наиль")))
+//                System.out.print(d);
+//        }
+//        int count1 = Collections.frequency(fruits, "Apple");//почему то не считает??? да фиг с ним
+//        System.out.println(count1);
+
+//        List<Fruits> fruits1 = new ArrayList<>(fruits);
+        System.out.println(fruits);
+        Map<String, Integer> fr = new HashMap<>();
+        for(Fruits q : fruits) {
+            if(fr.containsKey(q.getFruit()))
+                fr.put(q.getFruit(), fr.get(q.getFruit()) + 1);
+            else
+                fr.put(q.getFruit(), 1);
         }
+
+//        System.out.println(fruits.get(0).getFruit().equals(fruits1.get(0).getFruit()));
+        for(Map.Entry<String, Integer> pair : fr.entrySet()){
+            String  key = pair.getKey();
+            Integer value = pair.getValue();
+            System.out.println(key + " : " + value);
+        }
+        int count = 0;
+        for(Fruits f : fruits){
+            if(fr.containsKey(f.getFruit()) && fr.get(f.getFruit()) > 2){
+                ++count;
+                if(count < 3) {
+                    continue;
+                }
+                else {
+                    System.out.print(f + " ");
+                    continue;
+                }
+            }
+            System.out.print(f + " ");
+        }
+
+
+
         System.out.println();
 
         //10. Создать класс Person.
