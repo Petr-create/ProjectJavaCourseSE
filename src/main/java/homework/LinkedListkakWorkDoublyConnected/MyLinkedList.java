@@ -220,12 +220,12 @@ public class MyLinkedList<T> {
             int x = size() / 2;
             if(index < x){
                 int i = 0;
+                if(index == 0){
+                    removeFirst();
+                    return curFirst;
+                }
                 while (i < x){
                     if(i == index){
-                        if(i == 0){
-                            removeFirst();
-                            return curFirst;
-                        }
                         curFirst.getPrev().setNext(curFirst.getNext());
                         curFirst.getNext().setPrev(curFirst.getPrev());
                         return curFirst;
@@ -236,12 +236,12 @@ public class MyLinkedList<T> {
             }
             else{
                 int i = size() - 1;
+                if(index == size() - 1){
+                    removeLast();
+                    return curLast;
+                }
                 while (i >= x){
                     if(i == index){
-                        if(i == size() - 1){
-                            removeLast();
-                            return curLast;
-                        }
                         curLast.getPrev().setNext(curLast.getNext());
                         curLast.getNext().setPrev(curLast.getPrev());
                         return curLast;

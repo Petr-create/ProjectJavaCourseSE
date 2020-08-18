@@ -8,7 +8,7 @@ public class RunnerMyLinkedList {
         list.add("Строка3");
         list.add("Строка4");
         System.out.println("list = " + list);
-        System.out.println("list.remove(0) = " + list.remove(3));
+        System.out.println("list.remove(0) = " + list.remove(0));
         System.out.println("list = " + list);
     }
 }
