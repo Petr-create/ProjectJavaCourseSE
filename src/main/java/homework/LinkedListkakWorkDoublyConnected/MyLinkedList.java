@@ -53,21 +53,6 @@ public class MyLinkedList<T> {
         lstNode = temp;
     }
 
-    public void addLast1(T o){
-        Node<T> temp = new Node<>(o);
-        if(isEmpty()){
-            fstNode = temp;
-            temp.setPrev(lstNode);
-            lstNode = temp;
-        }
-        else {
-            lstNode.getPrev().setNext(temp);
-            temp.setPrev(lstNode.getPrev());
-            lstNode.setPrev(temp);
-            temp.setNext(lstNode);
-        }
-
-    }
 
     public boolean add(T o){
         addLast(o);
@@ -102,6 +87,7 @@ public class MyLinkedList<T> {
             throw new IndexOutOfBoundsException();
         }
     }
+
 
     public boolean contains(T o) {
         if(size() != 0) {
@@ -193,7 +179,7 @@ public class MyLinkedList<T> {
         return false;
     }
 
-    public Node<T> remove(int index) {
+    public Node<T> remove1(int index) {
         if(isCorrectIndex(index)){
             Node<T> curFirst = fstNode;
             Node<T> curLast = lstNode;
@@ -222,6 +208,47 @@ public class MyLinkedList<T> {
                 curLast = curLast.getPrev();
                 j--;
                 i++;
+            }
+        }
+        throw new IndexOutOfBoundsException();
+    }
+
+    public Node<T> remove(int index){
+        if(isCorrectIndex(index)){
+            Node<T> curFirst = fstNode;
+            Node<T> curLast = lstNode;
+            int x = size() / 2;
+            if(index < x){
+                int i = 0;
+                while (i < x){
+                    if(i == index){
+                        if(i == 0){
+                            removeFirst();
+                            return curFirst;
+                        }
+                        curFirst.getPrev().setNext(curFirst.getNext());
+                        curFirst.getNext().setPrev(curFirst.getPrev());
+                        return curFirst;
+                    }
+                    curFirst = curFirst.getNext();
+                    i++;
+                }
+            }
+            else{
+                int i = size() - 1;
+                while (i >= x){
+                    if(i == index){
+                        if(i == size() - 1){
+                            removeLast();
+                            return curLast;
+                        }
+                        curLast.getPrev().setNext(curLast.getNext());
+                        curLast.getNext().setPrev(curLast.getPrev());
+                        return curLast;
+                    }
+                    curLast = curLast.getPrev();
+                    i--;
+                }
             }
         }
         throw new IndexOutOfBoundsException();
