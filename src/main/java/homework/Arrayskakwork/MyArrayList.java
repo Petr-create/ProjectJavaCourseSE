@@ -17,9 +17,7 @@ public class MyArrayList {
     }
 
     public boolean isEmpty() {
-        if (realSize == 0)
-            return true;
-        return false;
+        return realSize == 0;
     }
 
     public boolean contains(Object o) {
@@ -64,8 +62,9 @@ public class MyArrayList {
                 array[i] = array[i+1];
             }
         }
-        else
+        else {
             return false;
+        }
         array[realSize - 1] = null;
         realSize--;
         return true;
@@ -77,15 +76,19 @@ public class MyArrayList {
         array = obj;
     }
 
+    private boolean isCorrectIndex(int index){
+        return index >= realSize && index < 0;
+    }
+
     public Object get(int index) {
-        if(index >= realSize && index >= 0){
+        if(isCorrectIndex(index)){
             throw new IndexOutOfBoundsException();
         }
         return array[index];
     }
 
     public Object set(int index, Object element) {
-        if(index >= realSize && index < 0){
+        if(isCorrectIndex(index)){
             throw new IndexOutOfBoundsException();
         }
         return array[index] = element;
@@ -110,7 +113,7 @@ public class MyArrayList {
     }
 
     public Object remove(int index) {
-        if(index < realSize && index >= 0){
+        if(!isCorrectIndex(index)){
             for (int i = index; i < realSize - 1; i++) {
                 array[i] = array[i+1];
             }
@@ -124,11 +127,10 @@ public class MyArrayList {
     }
 
     public int indexOf(Object o) {
-        if(contains(o)){
-            for (int i = 0; i < realSize; i++) {
-                if(array[i].equals(o)){
-                    return i;
-                }
+
+        for (int i = 0; i < realSize; i++) {
+            if(array[i].equals(o)){
+                return i;
             }
         }
         return -1;
