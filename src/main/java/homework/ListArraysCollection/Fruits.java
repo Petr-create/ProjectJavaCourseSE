@@ -11,4 +11,8 @@ public class Fruits {
     public String toString() {
         return fruit;
     }
+
+    public String getFruit() {
+        return fruit;
+    }
 }
